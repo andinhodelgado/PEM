@@ -12,10 +12,32 @@
         <activity android:name=".MenuInicialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".zxing.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="ScanBar"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SCAN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".EntregadorLeitorActivity" />
+        <activity android:name=".EntregadorDigActivity" />
+        <activity android:name=".RecebedorLeitorActivity" />
+        <activity android:name=".RecebedorDigActivity" />
+        <activity android:name=".OSActivity" />
+        <activity android:name=".DescrOSActivity" />
+        <activity android:name=".ItemOSDigActivity" />
+        <activity android:name=".ItemOSListaActivity" />
+        <activity android:name=".ProdutoLeitorActivity" />
+        <activity android:name=".ProdutoDigActivity" />
+        <activity android:name=".QtdeProdutoActivity"></activity>
     </application>
 
 </manifest>
