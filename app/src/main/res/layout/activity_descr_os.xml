@@ -11,6 +11,65 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DescrOSActivity">
 
+    <TextView
+        android:id="@+id/textViewEquipamento"
+        style="@style/TextViewTituloLista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_titulo_equip_os" />
 
+    <LinearLayout
+        android:id="@+id/rightRelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        >
+
+        <TextView
+            android:id="@+id/textViewCodEquip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/texto_cod_equip"
+            style="@style/TextView"
+            />
+
+        <TextView
+            android:id="@+id/textViewDescEquip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/texto_descr_equip"
+            style="@style/TextView"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rightRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonCancDescrOS"
+            style="@style/BotaoAvulso"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/texto_padrao_cancelar" />
+
+        <Button
+            android:id="@+id/buttonOkDescrOS"
+            style="@style/BotaoAvulso"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/texto_padrao_ok" />
+
+    </LinearLayout>
 
 </LinearLayout>
