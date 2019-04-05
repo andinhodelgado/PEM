@@ -9,18 +9,12 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import br.com.usinasantafe.pem.to.estaticas.ColabTO;
-import br.com.usinasantafe.pem.to.estaticas.ComponenteTO;
 import br.com.usinasantafe.pem.to.estaticas.EquipTO;
-import br.com.usinasantafe.pem.to.estaticas.EscalaTrabTO;
 import br.com.usinasantafe.pem.to.estaticas.ItemOSTO;
 import br.com.usinasantafe.pem.to.estaticas.OSTO;
-import br.com.usinasantafe.pem.to.estaticas.ParadaTO;
-import br.com.usinasantafe.pem.to.estaticas.ParametroTO;
-import br.com.usinasantafe.pem.to.estaticas.ServicoTO;
 import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 import br.com.usinasantafe.pem.to.variaveis.BoletimTO;
 import br.com.usinasantafe.pem.to.variaveis.ConfiguracaoTO;
-import br.com.usinasantafe.pem.to.variaveis.VerApontaFuncTO;
 
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
@@ -58,17 +52,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try{
 
 			TableUtils.createTable(cs, ColabTO.class);
-			TableUtils.createTable(cs, ParadaTO.class);
-			TableUtils.createTable(cs, ComponenteTO.class);
-			TableUtils.createTable(cs, ServicoTO.class);
 			TableUtils.createTable(cs, OSTO.class);
 			TableUtils.createTable(cs, ItemOSTO.class);
-			TableUtils.createTable(cs, EscalaTrabTO.class);
 			TableUtils.createTable(cs, EquipTO.class);
-			TableUtils.createTable(cs, ParametroTO.class);
 
 			TableUtils.createTable(cs, ConfiguracaoTO.class);
-			TableUtils.createTable(cs, VerApontaFuncTO.class);
 			TableUtils.createTable(cs, BoletimTO.class);
 			TableUtils.createTable(cs, ApontTO.class);
 

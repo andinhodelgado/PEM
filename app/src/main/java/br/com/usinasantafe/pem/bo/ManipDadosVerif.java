@@ -155,7 +155,7 @@ public class ManipDadosVerif {
                     atualizarAplicativo.setContext(this.menuInicialActivity);
                     atualizarAplicativo.execute();
                 } else {
-                    this.menuInicialActivity.startTimer(verAtual);
+//                    this.menuInicialActivity.startTimer(verAtual);
                 }
 
             }

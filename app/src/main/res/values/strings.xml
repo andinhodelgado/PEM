@@ -147,10 +147,11 @@
     <string name="texto_padrao_retornar">RETORNAR</string>
     <string name="texto_atualizar_bd">ATUALIZAR DADOS</string>
     <string name="texto_senha">SENHA:</string>
-    <string name="texto_funcionario">MATRIC. COLABORADOR</string>
+    <string name="texto_entregador">MATRIC. ENTREGADOR</string>
+    <string name="texto_recebedor">MATRIC. RECEBEDOR</string>
     <string name="texto_tit_func">COLABORADOR</string>
     <string name="texto_equip">EQUIPAMENTO:</string>
-    <string name="texto_func_matric">19759</string>
+    <string name="texto_matric">19759</string>
     <string name="texto_pega_matric">CAPTURAR MATRICULA</string>
     <string name="texto_dig_matric">DIGITAR MATRICULA</string>
     <string name="texto_titulo_menu">MENU</string>

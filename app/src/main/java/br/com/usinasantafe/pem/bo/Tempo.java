@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import br.com.usinasantafe.pem.to.estaticas.ParametroTO;
-
 public class Tempo {
 
     private static Tempo instance = null;
@@ -167,87 +165,7 @@ public class Tempo {
 		this.envioDado = envioDado;
 	}
 
-	public boolean verifDataHora(String dthrInicio){
 
-        String diaStr = dthrInicio.substring(0, 2);
-        String mesStr = dthrInicio.substring(3, 5);
-        String anoStr = dthrInicio.substring(6, 10);
-        String horaStr= dthrInicio.substring(11, 13);
-        String minutoStr= dthrInicio.substring(14, 16);
-
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(diaStr));
-        cal.set(Calendar.MONTH, Integer.parseInt(mesStr) - 1);
-        cal.set(Calendar.YEAR, Integer.parseInt(anoStr));
-        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(horaStr));
-        cal.set(Calendar.MINUTE, Integer.parseInt(minutoStr));
-
-        ParametroTO parametroTO = new ParametroTO();
-        List parametroList = parametroTO.all();
-        parametroTO = (ParametroTO) parametroList.get(0);
-
-        Date dataHoraInicio = cal.getTime();
-        dataHoraInicio = new Date(dataHoraInicio.getTime() + (parametroTO.getMinParametro() * 60 * 1000));
-
-        TimeZone tz = TimeZone.getDefault();
-        Date d = new Date();
-        Calendar calendar = Calendar.getInstance();
-        Long dt =  dataHoraInicio.getTime() - tz.getOffset(d.getTime());
-        calendar.setTimeInMillis(dt);
-
-        int mes = calendar.get(Calendar.MONTH);
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int ano = calendar.get(Calendar.YEAR);
-        int horas = calendar.get(Calendar.HOUR_OF_DAY);
-        int minutos = calendar.get(Calendar.MINUTE);
-        mes = mes + 1;
-
-        mesStr = "";
-        if(mes < 10){
-            mesStr = "0" + mes;
-        }
-        else{
-            mesStr = String.valueOf(mes);
-        }
-
-        diaStr = "";
-        if(dia < 10){
-            diaStr = "0" + dia;
-        }
-        else{
-            diaStr = String.valueOf(dia);
-        }
-
-        String horasStr = "";
-        if(horas < 10){
-            horasStr = "0" + horas;
-        }
-        else{
-            horasStr = String.valueOf(horas);
-        }
-
-        String minutosStr = "";
-        if(minutos < 10){
-            minutosStr = "0" + minutos;
-        }
-        else{
-            minutosStr = String.valueOf(minutos);
-        }
-
-        Log.i("PBM", "DATA HORA DE INICIO  = " +diaStr+"/"+mesStr+"/"+ano+" "+horasStr+":"+minutosStr);
-
-        Date dataHoraAtual = new Date();
-        dataHoraAtual = new Date(dataHoraAtual.getTime() - tz.getOffset(d.getTime()));
-
-        if(dataHoraAtual.after(dataHoraInicio)){
-            Log.i("PBM", "DEPOIS");
-            return false;
-        }else{
-            Log.i("PBM", "ANTES");
-            return true;
-        }
-
-    }
 
     public String manipDHSemTZ(String dthr){
 
