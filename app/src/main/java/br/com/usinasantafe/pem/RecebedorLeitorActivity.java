@@ -18,24 +18,24 @@ public class RecebedorLeitorActivity extends Activity {
         setContentView(R.layout.activity_recebedor_leitor);
 
         txtRetMatricRecebedor = (TextView) findViewById(R.id.txtRetMatricEntregador);
-        Button buttonOkEntregador = (Button) findViewById(R.id.buttonOkEntregador);
-        Button buttonCancEntregador = (Button) findViewById(R.id.buttonCancEntregador);
-        Button buttonDigEntregador = (Button) findViewById(R.id.buttonDigEntregador);
+        Button buttonOkRecebedor = (Button) findViewById(R.id.buttonOkEntregador);
+        Button buttonCancRecebedor = (Button) findViewById(R.id.buttonCancEntregador);
+        Button buttonDigRecebedor = (Button) findViewById(R.id.buttonDigEntregador);
         Button buttonAtualPadrao = (Button) findViewById(R.id.buttonAtualPadrao);
 
-        buttonOkEntregador.setOnClickListener(new View.OnClickListener() {
+        buttonOkRecebedor.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                Intent it = new Intent(RecebedorLeitorActivity.this, RecebedorLeitorActivity.class);
+                Intent it = new Intent(RecebedorLeitorActivity.this, OSActivity.class);
                 startActivity(it);
                 finish();
 
             }
         });
 
-        buttonCancEntregador.setOnClickListener(new View.OnClickListener() {
+        buttonCancRecebedor.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -48,7 +48,7 @@ public class RecebedorLeitorActivity extends Activity {
 
         });
 
-        buttonDigEntregador.setOnClickListener(new View.OnClickListener() {
+        buttonDigRecebedor.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

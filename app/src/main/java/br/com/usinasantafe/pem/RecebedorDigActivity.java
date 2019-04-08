@@ -53,7 +53,7 @@ public class RecebedorDigActivity extends ActivityGeneric {
     }
 
     public void onBackPressed()  {
-        Intent it = new Intent( RecebedorDigActivity.this, MenuInicialActivity.class);
+        Intent it = new Intent( RecebedorDigActivity.this, EntregadorLeitorActivity.class);
         startActivity(it);
         finish();
     }
