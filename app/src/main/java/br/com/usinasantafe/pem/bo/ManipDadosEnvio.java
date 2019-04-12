@@ -42,109 +42,6 @@ public class ManipDadosEnvio {
 
     //////////////////////// ENVIAR DADOS ////////////////////////////////////////////
 
-    public void enviarBolAberto() {
-
-        BoletimTO boletimTO = new BoletimTO();
-        List listBoletim = boletinsAbertoSemEnvio();
-
-        JsonArray jsonArrayBoletim = new JsonArray();
-        JsonArray jsonArrayAponta = new JsonArray();
-
-        for (int i = 0; i < listBoletim.size(); i++) {
-
-            boletimTO = (BoletimTO) listBoletim.get(i);
-            Gson gsonCabec = new Gson();
-            jsonArrayBoletim.add(gsonCabec.toJsonTree(boletimTO, boletimTO.getClass()));
-
-            ApontTO apontTO = new ApontTO();
-            List apontaList = apontTO.get("idBolApont", boletimTO.getIdBoletim());
-
-            for (int j = 0; j < apontaList.size(); j++) {
-
-                apontTO = (ApontTO) apontaList.get(j);
-                if (apontTO.getStatusApont() == 0L) {
-                    Gson gsonItem = new Gson();
-                    jsonArrayAponta.add(gsonItem.toJsonTree(apontTO, apontTO.getClass()));
-
-                }
-
-            }
-
-        }
-
-        JsonObject jsonBoletim = new JsonObject();
-        jsonBoletim.add("boletim", jsonArrayBoletim);
-
-        JsonObject jsonAponta = new JsonObject();
-        jsonAponta.add("aponta", jsonArrayAponta);
-
-        String dados = jsonBoletim.toString() + "_" + jsonAponta.toString();
-
-        Log.i("PMM", "ABERTO = " + dados);
-
-        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
-
-        String[] url = {urlsConexaoHttp.getsInsertBolAberto()};
-        Map<String, Object> parametrosPost = new HashMap<String, Object>();
-        parametrosPost.put("dado", dados);
-
-        ConHttpPostCadGenerico conHttpPostGenerico = new ConHttpPostCadGenerico();
-        conHttpPostGenerico.setParametrosPost(parametrosPost);
-        conHttpPostGenerico.execute(url);
-
-    }
-
-    public void enviarBolFechado() {
-
-        BoletimTO boletimTO = new BoletimTO();
-        List listBoletim = boletinsFechado();
-
-        JsonArray jsonArrayBoletim = new JsonArray();
-        JsonArray jsonArrayAponta = new JsonArray();
-
-        for (int i = 0; i < listBoletim.size(); i++) {
-
-            boletimTO = (BoletimTO) listBoletim.get(i);
-            Gson gsonCabec = new Gson();
-            jsonArrayBoletim.add(gsonCabec.toJsonTree(boletimTO, boletimTO.getClass()));
-
-            ApontTO apontTO = new ApontTO();
-            List apontaList = apontTO.get("idBolApont", boletimTO.getIdBoletim());
-
-            for (int j = 0; j < apontaList.size(); j++) {
-
-                apontTO = (ApontTO) apontaList.get(j);
-                if (apontTO.getStatusApont() == 0L) {
-                    Gson gsonItem = new Gson();
-                    jsonArrayAponta.add(gsonItem.toJsonTree(apontTO, apontTO.getClass()));
-                }
-
-            }
-
-        }
-
-        JsonObject jsonBoletim = new JsonObject();
-        jsonBoletim.add("boletim", jsonArrayBoletim);
-
-        JsonObject jsonAponta = new JsonObject();
-        jsonAponta.add("aponta", jsonArrayAponta);
-
-        String dados = jsonBoletim.toString() + "_" + jsonAponta.toString();
-
-        Log.i("PMM", "FECHADO = " + dados);
-
-        UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
-
-        String[] url = {urlsConexaoHttp.getsInsertBolFechado()};
-        Map<String, Object> parametrosPost = new HashMap<String, Object>();
-        parametrosPost.put("dado", dados);
-
-        ConHttpPostCadGenerico conHttpPostGenerico = new ConHttpPostCadGenerico();
-        conHttpPostGenerico.setParametrosPost(parametrosPost);
-        conHttpPostGenerico.execute(url);
-
-    }
-
     public void envioApontamento() {
 
         JsonArray jsonArrayAponta = new JsonArray();
@@ -177,75 +74,6 @@ public class ManipDadosEnvio {
 
     /////////////////////////////// DELETAR DADOS ///////////////////////////////////////////////
 
-    public void atualDadosBolAberto(String retorno) {
-
-        try {
-
-            int pos1 = retorno.indexOf("#") + 1;
-            int pos2 = retorno.indexOf("_") + 1;
-            String dados = retorno.substring(pos1, (pos2 - 1));
-
-            JSONObject jObj = new JSONObject(dados);
-            JSONArray jsonArray = jObj.getJSONArray("dados");
-
-            if (jsonArray.length() > 0) {
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    JSONObject objJsonBoletim = jsonArray.getJSONObject(i);
-
-                    BoletimTO boletimTO = new BoletimTO();
-                    List boletimList = boletimTO.get("idBoletim", objJsonBoletim.getLong("idBoletim"));
-                    boletimTO = (BoletimTO) boletimList.get(0);
-                    boletimTO.setIdExtBoletim(objJsonBoletim.getLong("idExtBoletim"));
-                    boletimTO.update();
-
-                    ApontTO apontTO = new ApontTO();
-                    List apontamentoList = apontTO.get("idBolApont", objJsonBoletim.getLong("idBoletim"));
-
-                    for (int j = 0; j < jsonArray.length(); j++) {
-                        apontTO = (ApontTO) apontamentoList.get(j);
-                        apontTO.setIdExtBolApont(objJsonBoletim.getLong("idExtBoletim"));
-                        apontTO.setStatusApont(1L);
-                        apontTO.update();
-                    }
-
-                }
-
-            }
-
-        } catch (Exception e) {
-            Tempo.getInstance().setEnvioDado(true);
-        }
-
-    }
-
-    public void delBolFechado() {
-
-        BoletimTO boletimMMTO = new BoletimTO();
-        List listBoletim = boletimMMTO.get("statusBoletim", 2L);
-        ArrayList<Long> rLista = new ArrayList<Long>();
-
-        for (int i = 0; i < listBoletim.size(); i++) {
-            boletimMMTO = (BoletimTO) listBoletim.get(i);
-            rLista.add(boletimMMTO.getIdBoletim());
-        }
-
-        ApontTO apontTO = new ApontTO();
-        List apontaList = apontTO.in("idBolApont", rLista);
-
-        for (int i = 0; i < apontaList.size(); i++) {
-            apontTO = (ApontTO) apontaList.get(i);
-            apontTO.delete();
-        }
-
-        for (int i = 0; i < listBoletim.size(); i++) {
-            boletimMMTO = (BoletimTO) listBoletim.get(i);
-            boletimMMTO.delete();
-        }
-
-    }
-
     public void atualApont() {
 
         ApontTO apontTO = new ApontTO();
@@ -258,7 +86,6 @@ public class ManipDadosEnvio {
         }
 
     }
-
 
     //////////////////////////TRAZER DADOS////////////////////////////
 
@@ -335,16 +162,8 @@ public class ManipDadosEnvio {
     }
 
     public void envioDadosPrinc() {
-        if (verifBolFechado()) {
-            enviarBolFechado();
-        } else {
-            if (verifBolAbertoSemEnvio()) {
-                enviarBolAberto();
-            } else {
-                if (verifAponta()) {
-                    envioApontamento();
-                }
-            }
+        if (verifAponta()) {
+            envioApontamento();
         }
     }
 
