@@ -16,6 +16,7 @@ import br.com.usinasantafe.pem.bo.ConexaoWeb;
 import br.com.usinasantafe.pem.bo.ManipDadosVerif;
 import br.com.usinasantafe.pem.to.estaticas.ItemOSTO;
 import br.com.usinasantafe.pem.to.estaticas.OSTO;
+import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 
 public class OSActivity extends ActivityGeneric {
 
@@ -45,6 +46,12 @@ public class OSActivity extends ActivityGeneric {
 
                         if(osList.size() > 0) {
 
+                            ApontTO apontTO = new ApontTO();
+                            List apontList = apontTO.get("statusApont", 1L);
+                            apontTO = (ApontTO) apontList.get(0);
+                            apontTO.setOsApont(Long.parseLong(editTextPadrao.getText().toString()));
+                            apontTO.update();
+
                             Intent it = new Intent(OSActivity.this, ItemOSListaActivity.class);
                             startActivity(it);
                             finish();
@@ -69,6 +76,12 @@ public class OSActivity extends ActivityGeneric {
 
                             } else {
 
+                                ApontTO apontTO = new ApontTO();
+                                List apontList = apontTO.get("statusApont", 1L);
+                                apontTO = (ApontTO) apontList.get(0);
+                                apontTO.setOsApont(Long.parseLong(editTextPadrao.getText().toString()));
+                                apontTO.update();
+
                                 Intent it = new Intent(OSActivity.this, ItemOSDigActivity.class);
                                 startActivity(it);
                                 finish();
@@ -77,6 +90,8 @@ public class OSActivity extends ActivityGeneric {
 
 
                         }
+
+                        osList.clear();
 
 
                     } catch (Exception e) {

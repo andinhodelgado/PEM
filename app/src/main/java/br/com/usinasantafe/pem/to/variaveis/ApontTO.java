@@ -13,23 +13,21 @@ public class ApontTO extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idApont;
     @DatabaseField
-    private Long idBolApont;
+    private Long entregadorApont;
     @DatabaseField
-    private Long idExtBolApont;
+    private Long recebedorApont;
     @DatabaseField
     private Long osApont;
     @DatabaseField
     private Long itemOSApont;
     @DatabaseField
-    private Long paradaApont;
+    private Long idProdApont;
     @DatabaseField
-    private String dthrInicialApont;
+    private Double qtdeProdApont;
     @DatabaseField
-    private String dthrFinalApont;
+    private String dthrApont;
     @DatabaseField
-    private Long realizApont;
-    @DatabaseField
-    private Long statusApont; //0 - Não Enviado; 1 - Enviado
+    private Long statusApont;
 
     public ApontTO() {
     }
@@ -42,20 +40,20 @@ public class ApontTO extends Entidade {
         this.idApont = idApont;
     }
 
-    public Long getIdBolApont() {
-        return idBolApont;
+    public Long getEntregadorApont() {
+        return entregadorApont;
     }
 
-    public void setIdBolApont(Long idBolApont) {
-        this.idBolApont = idBolApont;
+    public void setEntregadorApont(Long entregadorApont) {
+        this.entregadorApont = entregadorApont;
     }
 
-    public Long getIdExtBolApont() {
-        return idExtBolApont;
+    public Long getRecebedorApont() {
+        return recebedorApont;
     }
 
-    public void setIdExtBolApont(Long idExtBolApont) {
-        this.idExtBolApont = idExtBolApont;
+    public void setRecebedorApont(Long recebedorApont) {
+        this.recebedorApont = recebedorApont;
     }
 
     public Long getOsApont() {
@@ -74,36 +72,28 @@ public class ApontTO extends Entidade {
         this.itemOSApont = itemOSApont;
     }
 
-    public Long getParadaApont() {
-        return paradaApont;
+    public Long getIdProdApont() {
+        return idProdApont;
     }
 
-    public void setParadaApont(Long paradaApont) {
-        this.paradaApont = paradaApont;
+    public void setIdProdApont(Long idProdApont) {
+        this.idProdApont = idProdApont;
     }
 
-    public String getDthrInicialApont() {
-        return dthrInicialApont;
+    public Double getQtdeProdApont() {
+        return qtdeProdApont;
     }
 
-    public void setDthrInicialApont(String dthrInicialApont) {
-        this.dthrInicialApont = dthrInicialApont;
+    public void setQtdeProdApont(Double qtdeProdApont) {
+        this.qtdeProdApont = qtdeProdApont;
     }
 
-    public String getDthrFinalApont() {
-        return dthrFinalApont;
+    public String getDthrApont() {
+        return dthrApont;
     }
 
-    public void setDthrFinalApont(String dthrFinalApont) {
-        this.dthrFinalApont = dthrFinalApont;
-    }
-
-    public Long getRealizApont() {
-        return realizApont;
-    }
-
-    public void setRealizApont(Long realizApont) {
-        this.realizApont = realizApont;
+    public void setDthrApont(String dthrApont) {
+        this.dthrApont = dthrApont;
     }
 
     public Long getStatusApont() {
@@ -113,7 +103,4 @@ public class ApontTO extends Entidade {
     public void setStatusApont(Long statusApont) {
         this.statusApont = statusApont;
     }
-
-
-
 }

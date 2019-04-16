@@ -15,12 +15,14 @@ import br.com.usinasantafe.pem.to.estaticas.ComponenteTO;
 import br.com.usinasantafe.pem.to.estaticas.ItemOSTO;
 import br.com.usinasantafe.pem.to.estaticas.OSTO;
 import br.com.usinasantafe.pem.to.estaticas.ServicoTO;
+import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 
 public class ItemOSListaActivity extends Activity {
 
     private ListView lista;
     private List listItemOS;
     private PEMContext pemContext;
+    private ApontTO apontTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +33,13 @@ public class ItemOSListaActivity extends Activity {
 
         Button buttonRetItemOS = (Button) findViewById(R.id.buttonRetItemOS);
 
+        apontTO = new ApontTO();
+        List apontList = apontTO.get("statusApont", 1L);
+        apontTO = (ApontTO) apontList.get(0);
+        apontList.clear();
+
         OSTO osto = new OSTO();
-        List osList = osto.get("nroOS", 3L);
+        List osList = osto.get("nroOS", apontTO.getOsApont());
         osto = (OSTO) osList.get(0);
         osList.clear();
 
@@ -70,7 +77,9 @@ public class ItemOSListaActivity extends Activity {
                 // TODO Auto-generated method stub
 
                 ItemOSTO itemOSTO = (ItemOSTO) listItemOS.get(position);
-//                pemContext.getApontTO().setItemOSApont(itemOSTO.getSeqItemOS());
+                apontTO.setItemOSApont(itemOSTO.getSeqItemOS());
+                apontTO.update();
+
                 Intent it = new Intent(ItemOSListaActivity.this, ProdutoLeitorActivity.class);
                 startActivity(it);
 

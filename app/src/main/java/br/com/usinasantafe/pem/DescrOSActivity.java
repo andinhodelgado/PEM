@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.usinasantafe.pem.to.estaticas.OSTO;
+import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 
 public class DescrOSActivity extends Activity {
 
@@ -27,8 +28,13 @@ public class DescrOSActivity extends Activity {
 
         pemContext = (PEMContext) getApplication();
 
+        ApontTO apontTO = new ApontTO();
+        List apontList = apontTO.get("statusApont", 1L);
+        apontTO = (ApontTO) apontList.get(0);
+        apontList.clear();
+
         OSTO osto = new OSTO();
-        List osList = osto.get("nroOS", 2L);
+        List osList = osto.get("nroOS", apontTO.getOsApont());
         osto = (OSTO) osList.get(0);
         osList.clear();
 

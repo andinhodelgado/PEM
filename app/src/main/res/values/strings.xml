@@ -168,4 +168,8 @@
     <string name="texto_titulo_equip_os">EQUIPAMENTO DA OS</string>
     <string name="texto_cod_equip">715</string>
     <string name="texto_descr_equip">COLHEDORA</string>
+    <string name="texto_produto">PRODUTO</string>
+    <string name="texto_pega_prod">PEGAR CODIGO BARRA DO PRODUTO</string>
+    <string name="texto_dig_prod">DIGITAR PRODUTO</string>
+    <string name="texto_cod_prod">CODIGO: </string>
 </resources>

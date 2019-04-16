@@ -16,12 +16,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.com.usinasantafe.pem.MenuInicialActivity;
 import br.com.usinasantafe.pem.conWEB.ConHttpPostVerGenerico;
 import br.com.usinasantafe.pem.conWEB.UrlsConexaoHttp;
 import br.com.usinasantafe.pem.pst.GenericRecordable;
+import br.com.usinasantafe.pem.to.estaticas.OSTO;
+import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 import br.com.usinasantafe.pem.to.variaveis.AtualizaTO;
 
 /**
@@ -214,8 +217,8 @@ public class ManipDadosVerif {
                 if (!result.contains("exceeded")) {
 
                     int posicao = result.indexOf("#") + 1;
-                    String objPrinc = result.substring(0, result.indexOf("#"));
-                    String objSeg = result.substring(posicao, result.length());
+                    String objPrinc = result.substring(0, (posicao - 1));
+                    String objSeg = result.substring(posicao);
 
                     JSONObject jObj = new JSONObject(objPrinc);
                     JSONArray jsonArray = jObj.getJSONArray("dados");
@@ -244,6 +247,17 @@ public class ManipDadosVerif {
                             genericRecordable.insert(gson.fromJson(objeto.toString(), classe), classe);
 
                         }
+
+                        OSTO osto = new OSTO();
+                        List osList = osto.all();
+                        osto = (OSTO) osList.get(0);
+                        osList.clear();
+
+                        ApontTO apontTO = new ApontTO();
+                        List apontList = apontTO.get("statusApont", 1L);
+                        apontTO = (ApontTO) apontList.get(0);
+                        apontTO.setOsApont(osto.getNroOS());
+                        apontTO.update();
 
                         Intent it = new Intent(telaAtual, telaProx);
                         telaAtual.startActivity(it);

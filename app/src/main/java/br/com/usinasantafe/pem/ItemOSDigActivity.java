@@ -11,6 +11,8 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.usinasantafe.pem.to.variaveis.ApontTO;
+
 public class ItemOSDigActivity extends ActivityGeneric {
 
     private PEMContext pemContext;
@@ -33,7 +35,12 @@ public class ItemOSDigActivity extends ActivityGeneric {
 
                     if(Long.parseLong(editTextPadrao.getText().toString()) < 1000){
 
-//                        pbmContext.getApontTO().setItemOSApont(Long.parseLong(editTextPadrao.getText().toString()));
+                        ApontTO apontTO = new ApontTO();
+                        List apontList = apontTO.get("statusApont", 1L);
+                        apontTO = (ApontTO) apontList.get(0);
+                        apontTO.setItemOSApont(Long.parseLong(editTextPadrao.getText().toString()));
+                        apontTO.update();
+                        apontList.clear();
 
                         Intent it = new Intent(ItemOSDigActivity.this, ProdutoLeitorActivity.class);
                         startActivity(it);

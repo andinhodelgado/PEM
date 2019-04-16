@@ -13,7 +13,7 @@ public class ProdTO extends Entidade {
     @DatabaseField(id=true)
     private Long idProd;
     @DatabaseField
-    private Long codProd;
+    private String codProd;
     @DatabaseField
     private String descrProd;
 
@@ -28,11 +28,11 @@ public class ProdTO extends Entidade {
         this.idProd = idProd;
     }
 
-    public Long getCodProd() {
+    public String getCodProd() {
         return codProd;
     }
 
-    public void setCodProd(Long codProd) {
+    public void setCodProd(String codProd) {
         this.codProd = codProd;
     }
 

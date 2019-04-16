@@ -1,41 +1,64 @@
 package br.com.usinasantafe.pem;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ProdutoLeitorActivity extends Activity {
+import java.util.List;
+
+import br.com.usinasantafe.pem.bo.ConexaoWeb;
+import br.com.usinasantafe.pem.bo.ManipDadosVerif;
+import br.com.usinasantafe.pem.to.estaticas.ProdTO;
+import br.com.usinasantafe.pem.to.variaveis.ApontTO;
+
+public class ProdutoLeitorActivity extends ActivityGeneric {
 
     public static final int REQUEST_CODE = 0;
-    private TextView txtRetMatricEntregador;
+    private TextView txtRetProduto;
+    private String produto;
+    private Boolean verProd;
+    private ProdTO prodTO;
+    private ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produto_leitor);
 
-        txtRetMatricEntregador = (TextView) findViewById(R.id.txtRetMatricEntregador);
-        Button buttonOkEntregador = (Button) findViewById(R.id.buttonOkEntregador);
-        Button buttonCancEntregador = (Button) findViewById(R.id.buttonCancEntregador);
-        Button buttonDigEntregador = (Button) findViewById(R.id.buttonDigEntregador);
+        txtRetProduto = (TextView) findViewById(R.id.txtRetProduto);
+        Button buttonOkProduto = (Button) findViewById(R.id.buttonOkProduto);
+        Button buttonCancProduto = (Button) findViewById(R.id.buttonCancProduto);
+        Button buttonDigProduto = (Button) findViewById(R.id.buttonDigProduto);
         Button buttonAtualPadrao = (Button) findViewById(R.id.buttonAtualPadrao);
 
-        buttonOkEntregador.setOnClickListener(new View.OnClickListener() {
+        buttonOkProduto.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                Intent it = new Intent(ProdutoLeitorActivity.this, QtdeProdutoActivity.class);
-                startActivity(it);
-                finish();
+                if (verProd) {
+
+                    ApontTO apontTO = new ApontTO();
+                    List apontList = apontTO.get("statusApont", 1L);
+                    apontTO = (ApontTO) apontList.get(0);
+                    apontTO.setIdProdApont(prodTO.getIdProd());
+                    apontTO.update();
+
+                    Intent it = new Intent(ProdutoLeitorActivity.this, QtdeProdutoActivity.class);
+                    startActivity(it);
+                    finish();
+                }
 
             }
         });
 
-        buttonCancEntregador.setOnClickListener(new View.OnClickListener() {
+        buttonCancProduto.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -48,7 +71,7 @@ public class ProdutoLeitorActivity extends Activity {
 
         });
 
-        buttonDigEntregador.setOnClickListener(new View.OnClickListener() {
+        buttonDigProduto.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -65,6 +88,51 @@ public class ProdutoLeitorActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                AlertDialog.Builder alerta = new AlertDialog.Builder(ProdutoLeitorActivity.this);
+                alerta.setTitle("ATENÇÃO");
+                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        ConexaoWeb conexaoWeb = new ConexaoWeb();
+
+                        if (conexaoWeb.verificaConexao(ProdutoLeitorActivity.this)) {
+
+                            progressBar = new ProgressDialog(ProdutoLeitorActivity.this);
+                            progressBar.setCancelable(true);
+                            progressBar.setMessage("Atualizando Colaborador...");
+                            progressBar.show();
+
+                            ManipDadosVerif.getInstance().verDados("", "Colab"
+                                    , ProdutoLeitorActivity.this, ProdutoLeitorActivity.class, progressBar);
+
+                        } else {
+
+                            AlertDialog.Builder alerta = new AlertDialog.Builder(ProdutoLeitorActivity.this);
+                            alerta.setTitle("ATENÇÃO");
+                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                            alerta.show();
+
+                        }
+                    }
+                });
+
+                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alerta.show();
 
             }
 
@@ -80,23 +148,23 @@ public class ProdutoLeitorActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
-//            matricula = data.getStringExtra("SCAN_RESULT");
-//            if (matricula.length() == 8) {
-//                matricula = matricula.substring(0, 7);
-//                colabTO = new ColabTO();
-//                List listColab = colabTO.get("matricColab", Long.parseLong(matricula));
-//                if (listColab.size() > 0) {
-//                    colabTO = (ColabTO) listColab.get(0);
-//                    verFunc = true;
-//                    txtRetFunc.setText(matricula + "\n" + colabTO.getNomeColab());
-//                } else {
-//                    verFunc = false;
-//                    txtRetFunc.setText("Funcionário Inexistente");
-//                }
-//            }
+        if(REQUEST_CODE == requestCode && RESULT_OK == resultCode){
+
+            produto = data.getStringExtra("SCAN_RESULT");
+
+            prodTO = new ProdTO();
+            List prodList = prodTO.get("codProd", produto);
+
+            if (prodList.size() > 0) {
+                verProd = true;
+                prodTO = (ProdTO) prodList.get(0);
+                txtRetProduto.setText("CODIGO: " + prodTO.getCodProd() + "\n" + prodTO.getDescrProd());
+            }
+            else{
+                verProd = false;
+                txtRetProduto.setText("PRODUTO INEXISTENTE");
+            }
+
         }
-
     }
-
 }

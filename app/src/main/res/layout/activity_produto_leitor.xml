@@ -12,21 +12,21 @@
     tools:context=".ProdutoLeitorActivity">
 
     <TextView
-        android:id="@+id/txtTituloFunc"
+        android:id="@+id/txtTituloProduto"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_entregador" />
+        android:text="@string/texto_produto" />
 
     <TextView
-        android:id="@+id/txtRetMatricEntregador"
+        android:id="@+id/txtRetProduto"
         style="@style/TextView"
-        android:text="@string/texto_matric" />
+        android:text="@string/texto_cod_prod" />
 
     <Button
         android:id="@+id/buttonAcionarCamera"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_pega_matric"
+        android:text="@string/texto_pega_prod"
         android:onClick="callZXing" />
 
     <LinearLayout
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/buttonOkEntregador"
+            android:id="@+id/buttonOkProduto"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
@@ -43,7 +43,7 @@
             android:text="@string/texto_padrao_ok" />
 
         <Button
-            android:id="@+id/buttonCancEntregador"
+            android:id="@+id/buttonCancProduto"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
@@ -60,10 +60,10 @@
         android:text="@string/texto_atualizar_bd" />
 
     <Button
-        android:id="@+id/buttonDigEntregador"
+        android:id="@+id/buttonDigProduto"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_dig_matric" />
+        android:text="@string/texto_dig_prod" />
 
 </LinearLayout>
