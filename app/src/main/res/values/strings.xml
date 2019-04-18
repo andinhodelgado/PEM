@@ -140,6 +140,7 @@
     <string name="texto_padrao_canc">APAGAR</string>
     <string name="texto_num0">0</string>
     <string name="texto_num00">00</string>
+    <string name="texto_letra_a">A</string>
     <string name="texto_virg">,</string>
     <string name="texto_padrao_ok">OK</string>
     <string name="texto_padrao_cancelar">CANC.</string>
@@ -169,7 +170,10 @@
     <string name="texto_cod_equip">715</string>
     <string name="texto_descr_equip">COLHEDORA</string>
     <string name="texto_produto">PRODUTO</string>
-    <string name="texto_pega_prod">PEGAR CODIGO BARRA DO PRODUTO</string>
+    <string name="texto_pega_prod">CAPTURAR CODIGO BARRA DO PRODUTO</string>
     <string name="texto_dig_prod">DIGITAR PRODUTO</string>
-    <string name="texto_cod_prod">CODIGO: </string>
+    <string name="texto_qtde_prod">QTDE PRODUTO:</string>
+    <string name="texto_matric_entregador">POR FAVOR, CLIQUE NO BOTÃO CAPTURAR</string>
+    <string name="texto_matric_recebedor">POR FAVOR, CLIQUE NO BOTÃO CAPTURAR</string>
+    <string name="texto_cod_produto">POR FAVOR, CLIQUE NO BOTÃO CAPTURAR</string>
 </resources>

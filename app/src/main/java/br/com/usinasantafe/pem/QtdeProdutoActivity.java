@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.List;
+
+import br.com.usinasantafe.pem.bo.Tempo;
+import br.com.usinasantafe.pem.to.variaveis.ApontTO;
+import br.com.usinasantafe.pem.to.variaveis.ConfiguracaoTO;
+
 public class QtdeProdutoActivity extends ActivityGeneric {
 
     private PEMContext pemContext;
@@ -24,12 +30,29 @@ public class QtdeProdutoActivity extends ActivityGeneric {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                String lascas = editTextPadrao.getText().toString();
-                Double lascasNum = Double.valueOf(lascas.replace(",", "."));
+                if (!editTextPadrao.getText().toString().equals("")) {
 
-                Intent it = new Intent( QtdeProdutoActivity.this, MenuInicialActivity.class);
-                startActivity(it);
-                finish();
+                    String qtdeString = editTextPadrao.getText().toString();
+
+                    ConfiguracaoTO configuracaoTO = new ConfiguracaoTO();
+                    List configList = configuracaoTO.all();
+                    configuracaoTO = (ConfiguracaoTO) configList.get(0);
+                    configList.clear();
+
+                    ApontTO apontTO = new ApontTO();
+                    List apontList = apontTO.get("statusApont", 1L);
+                    apontTO = (ApontTO) apontList.get(0);
+                    apontTO.setDthrApont(Tempo.getInstance().datahora());
+                    apontTO.setQtdeProdApont(Double.valueOf(qtdeString.replace(",", ".")));
+                    apontTO.setStatusApont(2L);
+                    apontTO.setEquipApont(configuracaoTO.getEquipConfig());
+                    apontTO.update();
+
+                    Intent it = new Intent(QtdeProdutoActivity.this, MenuInicialActivity.class);
+                    startActivity(it);
+                    finish();
+
+                }
 
             }
 

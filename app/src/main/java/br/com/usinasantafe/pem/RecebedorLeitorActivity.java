@@ -31,10 +31,10 @@ public class RecebedorLeitorActivity extends ActivityGeneric {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recebedor_leitor);
 
-        txtRetMatricRecebedor = (TextView) findViewById(R.id.txtRetMatricEntregador);
-        Button buttonOkRecebedor = (Button) findViewById(R.id.buttonOkEntregador);
-        Button buttonCancRecebedor = (Button) findViewById(R.id.buttonCancEntregador);
-        Button buttonDigRecebedor = (Button) findViewById(R.id.buttonDigEntregador);
+        txtRetMatricRecebedor = (TextView) findViewById(R.id.txtRetMatricRecebedor);
+        Button buttonOkRecebedor = (Button) findViewById(R.id.buttonOkRecebedor);
+        Button buttonCancRecebedor = (Button) findViewById(R.id.buttonCancRecebedor);
+        Button buttonDigRecebedor = (Button) findViewById(R.id.buttonDigRecebedor);
         Button buttonAtualPadrao = (Button) findViewById(R.id.buttonAtualPadrao);
 
         buttonOkRecebedor.setOnClickListener(new View.OnClickListener() {

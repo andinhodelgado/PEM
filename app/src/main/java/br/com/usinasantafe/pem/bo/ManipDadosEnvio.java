@@ -43,7 +43,7 @@ public class ManipDadosEnvio {
         JsonArray jsonArrayAponta = new JsonArray();
 
         ApontTO apontTO = new ApontTO();
-        List apontaList = apontTO.all();
+        List apontaList = apontTO.get("statusApont", 2L);
 
         for (int i = 0; i < apontaList.size(); i++) {
             apontTO = (ApontTO) apontaList.get(i);
@@ -71,16 +71,21 @@ public class ManipDadosEnvio {
     /////////////////////////////// DELETAR DADOS ///////////////////////////////////////////////
 
     public void delApont() {
-
-        new ApontTO().deleteAll();
-
+        ApontTO apontTO = new ApontTO();
+        List apontaList = apontTO.get("statusApont", 2L);
+        for (int i = 0; i < apontaList.size(); i++) {
+            apontTO = (ApontTO) apontaList.get(i);
+            apontTO.delete();
+        }
     }
 
 
     //////////////////////VERIFICAÇÃO DE DADOS///////////////////////////
 
     public boolean verifAponta() {
-        return new ApontTO().hasElements();
+        ApontTO apontTO = new ApontTO();
+        List apontaList = apontTO.get("statusApont", 2L);
+        return apontaList.size() > 0;
     }
 
     /////////////////////////MECANISMO DE ENVIO//////////////////////////////////

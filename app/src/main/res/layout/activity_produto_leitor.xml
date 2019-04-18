@@ -19,7 +19,9 @@
     <TextView
         android:id="@+id/txtRetProduto"
         style="@style/TextView"
-        android:text="@string/texto_cod_prod" />
+        android:paddingBottom="10dp"
+        android:paddingTop="12dp"
+        android:text="@string/texto_cod_produto" />
 
     <Button
         android:id="@+id/buttonAcionarCamera"

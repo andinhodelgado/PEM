@@ -14,7 +14,7 @@
     <TextView
         android:id="@+id/textViewPadrao"
         style="@style/TextView"
-        android:text="@string/texto_num_item" />
+        android:text="@string/texto_qtde_prod" />
 
     <EditText
         android:id="@+id/editTextPadrao"
@@ -22,6 +22,6 @@
 
     <include
         android:id="@+id/layout_novo_botoes"
-        layout="@layout/layout_botoes_s_atual" />
+        layout="@layout/layout_botoes_virgula" />
 
 </LinearLayout>

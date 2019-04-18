@@ -14,8 +14,6 @@ import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 
 public class DescrOSActivity extends Activity {
 
-    private PEMContext pemContext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +23,6 @@ public class DescrOSActivity extends Activity {
         TextView textViewDescEquip = (TextView) findViewById(R.id.textViewDescEquip);
         Button buttonOkDescrOS = (Button) findViewById(R.id.buttonOkDescrOS);
         Button buttonCancDescrOS = (Button) findViewById(R.id.buttonCancDescrOS);
-
-        pemContext = (PEMContext) getApplication();
 
         ApontTO apontTO = new ApontTO();
         List apontList = apontTO.get("statusApont", 1L);

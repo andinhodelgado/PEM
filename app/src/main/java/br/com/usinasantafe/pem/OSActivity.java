@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,14 +22,12 @@ import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 public class OSActivity extends ActivityGeneric {
 
     private ProgressDialog progressBar;
-    private PEMContext pemContext;
+    private Handler customHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_os);
-
-        pemContext = (PEMContext) getApplication();
 
         Button buttonOkOS = (Button) findViewById(R.id.buttonOkPadrao);
         Button buttonCancOS = (Button) findViewById(R.id.buttonCancPadrao);
@@ -36,7 +35,7 @@ public class OSActivity extends ActivityGeneric {
         buttonOkOS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 if (!editTextPadrao.getText().toString().equals("")) {
 
                     try {
@@ -70,6 +69,8 @@ public class OSActivity extends ActivityGeneric {
                                 osto.deleteAll();
                                 ItemOSTO itemOSTO = new ItemOSTO();
                                 itemOSTO.deleteAll();
+
+                                customHandler.postDelayed(updateTimerThread, 10000);
 
                                 ManipDadosVerif.getInstance().verDados(editTextPadrao.getText().toString(), "OS"
                                         , OSActivity.this, DescrOSActivity.class, progressBar);
@@ -131,5 +132,31 @@ public class OSActivity extends ActivityGeneric {
         startActivity(it);
         finish();
     }
+
+    private Runnable updateTimerThread = new Runnable() {
+
+        public void run() {
+
+            if(!ManipDadosVerif.getInstance().isVerTerm()) {
+
+                ManipDadosVerif.getInstance().cancelVer();
+                if (progressBar.isShowing()) {
+                    progressBar.dismiss();
+                }
+
+                ApontTO apontTO = new ApontTO();
+                List apontList = apontTO.get("statusApont", 1L);
+                apontTO = (ApontTO) apontList.get(0);
+                apontTO.setOsApont(Long.parseLong(editTextPadrao.getText().toString()));
+                apontTO.update();
+
+                Intent it = new Intent(OSActivity.this, ItemOSDigActivity.class);
+                startActivity(it);
+                finish();
+
+            }
+
+        }
+    };
 
 }

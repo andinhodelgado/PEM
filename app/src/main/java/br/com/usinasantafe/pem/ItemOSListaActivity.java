@@ -21,15 +21,12 @@ public class ItemOSListaActivity extends Activity {
 
     private ListView lista;
     private List listItemOS;
-    private PEMContext pemContext;
     private ApontTO apontTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_oslista);
-
-        pemContext = (PEMContext) getApplication();
 
         Button buttonRetItemOS = (Button) findViewById(R.id.buttonRetItemOS);
 

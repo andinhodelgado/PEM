@@ -23,11 +23,13 @@ public class ApontTO extends Entidade {
     @DatabaseField
     private Long idProdApont;
     @DatabaseField
+    private Long equipApont;
+    @DatabaseField
     private Double qtdeProdApont;
     @DatabaseField
     private String dthrApont;
     @DatabaseField
-    private Long statusApont;
+    private Long statusApont; //1 - Esta apontando ainda; 2 - Terminou o Apontamento
 
     public ApontTO() {
     }
@@ -80,6 +82,14 @@ public class ApontTO extends Entidade {
         this.idProdApont = idProdApont;
     }
 
+    public Long getEquipApont() {
+        return equipApont;
+    }
+
+    public void setEquipApont(Long equipApont) {
+        this.equipApont = equipApont;
+    }
+
     public Double getQtdeProdApont() {
         return qtdeProdApont;
     }
@@ -103,4 +113,5 @@ public class ApontTO extends Entidade {
     public void setStatusApont(Long statusApont) {
         this.statusApont = statusApont;
     }
+
 }
