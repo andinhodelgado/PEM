@@ -18,7 +18,6 @@ import br.com.usinasantafe.pem.bo.ManipDadosVerif;
  */
 public class ConHttpPostVerGenerico extends AsyncTask<String, Void, String> {
 
-    private static ConHttpPostCadGenerico instance = null;
     private Map<String, Object> parametrosPost = null;
 
     public ConHttpPostVerGenerico() {

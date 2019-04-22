@@ -10,12 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.usinasantafe.pem.bo.ConexaoWeb;
 import br.com.usinasantafe.pem.bo.ManipDadosVerif;
+import br.com.usinasantafe.pem.pst.EspecificaPesquisa;
 import br.com.usinasantafe.pem.to.estaticas.ProdTO;
+import br.com.usinasantafe.pem.to.estaticas.REquipProdTO;
 import br.com.usinasantafe.pem.to.variaveis.ApontTO;
+import br.com.usinasantafe.pem.to.variaveis.ConfiguracaoTO;
 
 public class ProdutoLeitorActivity extends ActivityGeneric {
 
@@ -156,9 +160,37 @@ public class ProdutoLeitorActivity extends ActivityGeneric {
             List prodList = prodTO.get("codProd", produto);
 
             if (prodList.size() > 0) {
-                verProd = true;
-                prodTO = (ProdTO) prodList.get(0);
-                txtRetProduto.setText("CODIGO: " + prodTO.getCodProd() + "\n" + prodTO.getDescrProd());
+
+                ConfiguracaoTO configuracaoTO = new ConfiguracaoTO();
+                List configList = configuracaoTO.all();
+                configuracaoTO = (ConfiguracaoTO) configList.get(0);
+                configList.clear();
+
+                REquipProdTO rEquipProdTO = new REquipProdTO();
+                ArrayList listaPesq = new ArrayList();
+
+                EspecificaPesquisa pesquisa = new EspecificaPesquisa();
+                pesquisa.setCampo("idEquip");
+                pesquisa.setValor(configuracaoTO.getEquipConfig());
+                listaPesq.add(pesquisa);
+
+                EspecificaPesquisa pesquisa2 = new EspecificaPesquisa();
+                pesquisa2.setCampo("idProd");
+                pesquisa2.setValor(prodTO.getIdProd());
+                listaPesq.add(pesquisa2);
+
+                List rEquipProdList = rEquipProdTO.get(listaPesq);
+
+                if(rEquipProdList.size() > 0){
+                    verProd = true;
+                    prodTO = (ProdTO) prodList.get(0);
+                    txtRetProduto.setText("CODIGO: " + prodTO.getCodProd() + "\n" + prodTO.getDescrProd());
+                }
+                else{
+                    verProd = false;
+                    txtRetProduto.setText("PRODUTO INEXISTENTE NO ESTOQUE DO EQUIPAMENTO");
+                }
+
             }
             else{
                 verProd = false;

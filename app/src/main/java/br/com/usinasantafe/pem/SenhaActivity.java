@@ -32,8 +32,9 @@ public class SenhaActivity extends ActivityGeneric {
                 // TODO Auto-generated method stub
 
                 ConfiguracaoTO configuracaoTO = new ConfiguracaoTO();
+                List configList = configuracaoTO.all();
 
-                if (!configuracaoTO.hasElements()) {
+                if (configList.size() == 0) {
 
                     Intent it = new Intent(SenhaActivity.this, ConfiguracaoActivity.class);
                     startActivity(it);
@@ -53,6 +54,9 @@ public class SenhaActivity extends ActivityGeneric {
                     }
 
                 }
+
+                configList.clear();
+
 
             }
         });
