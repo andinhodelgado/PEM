@@ -150,7 +150,7 @@ public class OSActivity extends ActivityGeneric {
                 apontTO.setOsApont(Long.parseLong(editTextPadrao.getText().toString()));
                 apontTO.update();
 
-                Intent it = new Intent(OSActivity.this, ItemOSDigActivity.class);
+                Intent it = new Intent(OSActivity.this, ItemOSListaActivity.class);
                 startActivity(it);
                 finish();
 

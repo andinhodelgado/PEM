@@ -15,8 +15,6 @@ import br.com.usinasantafe.pem.to.variaveis.ApontTO;
 
 public class ItemOSDigActivity extends ActivityGeneric {
 
-    private PEMContext pemContext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +22,6 @@ public class ItemOSDigActivity extends ActivityGeneric {
 
         Button buttonOkItemOSDig = (Button) findViewById(R.id.buttonOkPadrao);
         Button buttonCancItemOSDig = (Button) findViewById(R.id.buttonCancPadrao);
-
-        pemContext = (PEMContext) getApplication();
 
         buttonOkItemOSDig.setOnClickListener(new View.OnClickListener() {
             @Override
